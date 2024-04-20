@@ -17,9 +17,9 @@ import "./App.css";
 function App() {
     return (
         <div className="main">
+        <div className="navbar"><Navbar /></div>
 
         <Router>
-                <div><Navbar /></div>
                 {/* <div className="left_bar"><AsideBar /></div> */}
                     {/* <Routes>
                         <Route path="/" element={<Home/>} />                

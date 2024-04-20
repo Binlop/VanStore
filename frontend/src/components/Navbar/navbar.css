@@ -1,0 +1,64 @@
+
+.header{
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+}
+
+.header_top{
+    position: relative;
+    display: flex;
+    align-items: center;
+
+}
+
+.word-list{
+    margin-left: 200px;
+}
+
+.word-list span {
+    margin-right: 100px; /* Задаем отступ между словами */
+}
+
+.header_low{
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: 50px;
+}
+
+.search {
+    display: flex;
+    height: 100%;
+    width: 60%;    
+    margin-left: 10px;
+}
+
+.search input {
+    flex-grow: 1; /* Занимать доступное пространство внутри родительского элемента */    
+    background:rgba(247, 242, 245, 0.8);
+    /* border:rgba(247, 242, 245, 0.8); */
+    border-radius: 2%;
+    border: rgba(247, 242, 245, 0.8); /* Убираем границы */
+    outline: 2px solid grey;
+}
+
+.user-actions-list{
+    right: 0;
+    position: absolute;
+    align-items: center;
+    display: flex;
+}
+
+.user-actions-list-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.user-actions-list span {
+    margin-left: 20px;
+    margin-right: 30px; /* Задаем отступ между словами */
+    font-size: 18px;
+}
