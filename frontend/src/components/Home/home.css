@@ -1,0 +1,30 @@
+.home {
+    margin: 0 10%; /* Применяем отступы с обеих сторон блока */
+    /* background: red; */
+    display: flex;
+    justify-content: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 3 столбца */
+    gap: 20px; /* Равный пробел между товарами */
+    padding: 20px; /* Отступы от краев блока */    
+    align-items: center;
+}
+
+.item {
+    background-color: white;
+    border-radius: 2%;
+    padding: 20px; /* Отступы вокруг товаров */
+    text-align: center;
+    height: 175px;
+    width: 160px;
+    margin: 10px;
+    border: 1px solid  #f0f0f0;
+}
+
+.item img {
+    display: block; /* Чтобы изображение не имело отступов сверху и снизу */
+    margin: 0 auto; /* Центрирование изображения по горизонтали */
+}
