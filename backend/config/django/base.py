@@ -35,7 +35,7 @@ THIRD_PARTY = (
 )
 
 LOCAL_APPS = (
-
+    'products',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY + LOCAL_APPS
@@ -105,3 +105,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'django_static/')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'backend/media/')
