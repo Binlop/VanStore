@@ -3,15 +3,16 @@ from typing import Union
 from .models import Phone, Computer
 from .services.device import PhoneService, ComputerService
 
+
 class DeviceSerializer(serializers.Serializer):
-    id = serializers.ReadOnlyField()
+    id = serializers.UUIDField()
     name = serializers.CharField()
     description = serializers.CharField()
 
-    def __init__(self, instance=None, data=..., **kwargs):
+    def __init__(self, *args, **kwargs):
         fields = kwargs.pop('fields', None)
         
-        super().__init__(instance, data, **kwargs)
+        super().__init__(*args, **kwargs)
         self.service = None
 
         if fields is not None:
@@ -33,14 +34,28 @@ class DeviceSerializer(serializers.Serializer):
         else:
             raise ValueError("Service is not set for serializer")
 
+class HandleDeviceSerializer(serializers.Serializer):
+
+    def to_representation(self, value):
+        """
+        Serialize bookmark instances using a bookmark serializer,
+        and note instances using a note serializer.
+        """
+        if isinstance(value, Phone):
+            serializer = PhoneSerializer(value)
+        elif isinstance(value, Computer):
+            serializer = ComputerSerializer(value)
+        else:
+            raise Exception('Unexpected type of MODEL object')
+        return serializer.data
 
 class PhoneSerializer(DeviceSerializer):
-    def __init__(self, instance=None, data=..., **kwargs):
-        super().__init__(instance, data, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.service = PhoneService
 
 
 class ComputerSerializer(DeviceSerializer):
-    def __init__(self, instance=None, data=..., **kwargs):
-        super().__init__(instance, data, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.service = ComputerService
