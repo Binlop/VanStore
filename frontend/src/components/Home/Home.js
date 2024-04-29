@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios"
 import './home.css'
 import product1 from './example_products_photo/1.webp'
 import product2 from './example_products_photo/2.webp'
@@ -11,9 +12,38 @@ import product8 from './example_products_photo/8.webp'
 
 
 export default function Home() {
+    const [productsList, setProductsList] = useState(null);
+
+    useEffect(() => {
+        getProductList()
+    }, []);
+
+    const getProductList = () => {
+        axios
+            .get(`/api/products`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then((res) => {
+                setProductsList(res.data);
+            })
+            .catch((err) => console.log(err));
+    }
     return(
     <div className="home">
             <div class="grid-container">
+            {productsList && productsList.map(product => (                    
+                    <div className="item">
+                        <div style={{ alignItems: 'center' }}>
+                            <img src={product1} width={145} height={145} />
+                            <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
+                                <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
+                                <span>{product.name}</span>
+                            </div>
+                        </div>
+                    </div>
+                ))}
                 <div className="item">
                     <div style={{ alignItems: 'center' }}>
                         <img src={product1} width={145} height={145} />
