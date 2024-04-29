@@ -23,10 +23,21 @@ class DeviceViewBase(APIView):
         
 class DeviceListView(DeviceViewBase):
     selector = DeviceSelector
-    serializer = serializers.DeviceSerializer
+    serializer = serializers.HandleDeviceSerializer
 
     def get(self, request, format=None):
         selector = self.get_selector_class()
         devices = selector.get_list_products()      
         serializer = self.get_serializer_class()(devices, many=True)
+        return Response(serializer.data)
+    
+class DeviceDetailView(DeviceViewBase):
+    selector = DeviceSelector
+    serializer = serializers.HandleDeviceSerializer
+
+    def get(self, request, pk):
+        selector = self.get_selector_class()
+        device = selector.get_detail_product(pk=pk)
+        serializer = self.get_serializer_class()(device)
+                
         return Response(serializer.data)
