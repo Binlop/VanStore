@@ -1,29 +1,39 @@
 from typing import Union
 from django.db import transaction
-from products.models import Phone, Computer
+from products.models import Device, Phone, Computer
 
 class DeviceService:
     model = None
 
     @transaction.atomic
     def create_device(self, validated_data: dict) -> Union[Phone, Computer]:
-        device = self.model.objects.create(
+        product = self.model.objects.create(
             name = validated_data.get('name'),
-            description = validated_data.get('description')
+            description = validated_data.get('description'),
+            price = validated_data.get('price', 0),
+            quantity = validated_data.get('quantity', 0),
+        )
+        product.save()
+
+        device = Device.objects.create(
+            content_object = product
         )
         device.save()
-        return device
+
+        return product
 
     @transaction.atomic
-    def update_device(self, device: Union[Phone, Computer], validated_data: dict) -> Union[Phone, Computer]:
-        device.name = validated_data.get('name', device.name)
-        device.description = validated_data.get('description', device.description)
+    def update_device(self, product: Union[Phone, Computer], validated_data: dict) -> Union[Phone, Computer]:
+        product.name = validated_data.get('name', product.name)
+        product.description = validated_data.get('description', product.description)
+        product.price = validated_data.get('price', product.price)
+        product.quantity = validated_data.get('quantity', product.quantity)
 
-        device.save()
-        return device
+        product.save()
+        return product
     
 class PhoneService(DeviceService):
     model = Phone
 
 class ComputerService(DeviceService):
-    model = Phone
+    model = Computer

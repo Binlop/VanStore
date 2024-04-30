@@ -14,12 +14,5 @@ class DeviceSelector:
         return device_list
     
     def get_detail_product(self, pk) -> Union[Phone, Computer]:
-        device = Phone.objects.get(id=pk)
-        return device
-        # models = [Phone, Computer]
-        # for model in models:
-        #     try:
-        #         device = model.objects.get(pk=pk)
-        #         return device
-        #     except model.DoesNotExist:
-        #         continue
+        device = Device.objects.get(object_id=pk)
+        return device.content_object
