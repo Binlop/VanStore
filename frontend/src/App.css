@@ -4,7 +4,9 @@
 
 .navbar{
   background: white;
-  position: fixed;
+  position: block;
   height: 150px;
-  width: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
 }

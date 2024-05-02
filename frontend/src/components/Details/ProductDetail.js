@@ -2,7 +2,7 @@ import React from "react";
 import './Details.css';
 import product from './/example_products_photo/1.webp';
 
-export default function Details() {
+export default function ProductDetail() {
 	return(
 		<div className="container">
 			<h1 className="header">Товар "N"</h1>

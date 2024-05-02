@@ -5,7 +5,7 @@ import logo from './logo.png'
 
 export default function Navbar() {
     return(
-    <div className="header">
+    <div className="header_main">
         <div className="header_top">
             <h3>IT SCIENCE</h3>
             <div className="word-list">
