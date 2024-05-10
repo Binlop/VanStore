@@ -1,20 +1,28 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import './Login.css';
+import AuthContext from "../../../context/AuthContext";
 
 export default function Login() {
 
-    return(
+    let { loginUser } = useContext(AuthContext)
+
+    useEffect(() => {
+        document.title = "Вход"
+    }, []);
+
+
+    return (
         <div className="login-wrapper">
-            <form>
+            <form onSubmit={loginUser}>
                 <h1>Вход</h1>
                 <div className="login-input-box">
-                    <input type="text" placeholder="Email" required />
-                    <i class='bx bx-envelope' ></i>
+                    <input name="username" type="email" placeholder="Email" required />
+                    <i className='bx bx-envelope' ></i>
                 </div>
                 <div className="login-input-box">
-                    <input type="password" placeholder="Пароль" required />
-                    <i class='bx bx-lock-alt' ></i>
-                    
+                    <input minLength={8} name="password" type="password" placeholder="Пароль" required />
+                    <i className='bx bx-lock-alt' ></i>
+
                 </div>
 
                 <div className="login-remember-forgot">
