@@ -4,15 +4,18 @@ from .models import Phone, Computer
 from .services.device import PhoneService, ComputerService
 
 class HandleDeviceSerializer(serializers.Serializer):
+    def __init__(self, *args, **kwargs):
+        self.custom_fields = kwargs.pop('fields', None)
+        super().__init__(*args, **kwargs)
 
     def to_representation(self, value):
         """
         Сериалайзер определяет тип объекта и передает его в соответствующий сериализатор
         """
         if isinstance(value, Phone):
-            serializer = PhoneSerializer(value)
+            serializer = PhoneSerializer(value, fields=self.custom_fields)
         elif isinstance(value, Computer):
-            serializer = ComputerSerializer(value)
+            serializer = ComputerSerializer(value, fields=self.custom_fields)
         else:
             raise Exception('Unexpected type of MODEL object')
         return serializer.data

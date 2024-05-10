@@ -33,6 +33,18 @@ class DeviceBase(BaseModel):
     description = models.TextField(verbose_name='Описание товара', null=True, help_text="Технические характеристики устройства")
     price = models.DecimalField(verbose_name="Цена товара", max_digits=19, decimal_places=10)
     quantity = models.IntegerField(verbose_name="Кол-во товара", default=0)
+    rating = models.FloatField(verbose_name='Рейтинг', default=5)
+    reliability = models.FloatField(verbose_name='Надежность', default=5)
+
+    # Заводские данные
+    warranty = models.IntegerField(verbose_name='Гарантия срок мес.', null=True, default=None)
+    manufacturer = models.CharField(verbose_name='Страна-производитель', max_length=100, default='')
+
+    # Внешний вид
+    housing_material = models.CharField(max_length=100, default='metal')  # Добавлено поле housing_material с дефолтным значением 'metal'
+
+    # Экран
+    screen_diagonal = models.FloatField(verbose_name='Диагональ экрана (дюйм)', default=0)
 
     class Meta:
         abstract = True

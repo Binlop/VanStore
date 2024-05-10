@@ -30,6 +30,38 @@ export default function Home() {
             })
             .catch((err) => console.log(err));
     }
+
+const [loadingData, setLoadingData] = useState(true);
+const [data, setData] = useState([]);
+
+const getProductDetail = () => {
+    axios
+        .get('/api/products/c79d3862-594c-4554-ba0f-4f76c44db03d/')
+        .then((res) => {
+            setData(res.data);
+        })
+        .catch((err) => console.log(err));
+}
+
+
+  useEffect(() => {
+    getProductDetail();
+    console.log(data)
+      }, []);
+
+// Профессор Кирилл Евгеньевич, [09.05.2024 16:07]
+    async function getData() { 
+      await axios
+        .get('/api/products/24a4d40b-6f5b-4642-8d48-77abee12b1b1/')
+        .then((res) => {
+          setData(res.data);
+          console.log(data);
+          setLoadingData(false);
+        });
+    }
+    if (loadingData) {
+          getData();
+        }
     return(
     <div className="home">
             <div class="grid-container">

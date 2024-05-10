@@ -41,6 +41,7 @@ THIRD_PARTY = (
 LOCAL_APPS = (
     'products',
     'users',
+    'cart',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY + LOCAL_APPS
@@ -117,6 +118,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'django_static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'backend/media/')
 
 CORS_ORIGIN_ALLOW_ALL=True
+
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [

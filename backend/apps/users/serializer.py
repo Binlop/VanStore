@@ -7,13 +7,14 @@ from rest_framework.validators import UniqueValidator
 from django.core.validators import RegexValidator
 from .services.user_process import UserService
 
-class TokenObtainPairSerializer(TokenObtainPairSerializer):
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
         token['username'] = user.username
         return token
-
+    
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
