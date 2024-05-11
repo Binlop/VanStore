@@ -21,10 +21,11 @@ function App() {
         <div className="main">
         <Router>
         <AuthProvider>
+        <Navbar />
         <Routes>
         <Route path="/login/" element={<Login/>} />     
         </Routes>
-        <Navbar />
+        
 
         <Routes>
 

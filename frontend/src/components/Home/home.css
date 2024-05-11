@@ -3,6 +3,7 @@
     /* background: red; */
     display: flex;
     justify-content: center;
+    
 }
 
 .grid-container {
@@ -11,6 +12,7 @@
     gap: 20px; /* Равный пробел между товарами */
     padding: 20px; /* Отступы от краев блока */    
     align-items: center;
+    margin-top: 150px;
 }
 
 .item {
@@ -18,8 +20,8 @@
     border-radius: 2%;
     padding: 20px; /* Отступы вокруг товаров */
     text-align: center;
-    height: 175px;
-    width: 160px;
+    /* height: 175px; Из-за этих свойств картинки съезжают
+    width: 160px; */
     margin: 10px;
     border: 1px solid  #f0f0f0;
 }
