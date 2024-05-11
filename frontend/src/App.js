@@ -10,6 +10,8 @@ import Navbar from "./components/Navbar/Navbar";
 // import AsideBar from "./components/Asidebar/Sidebar";
 import Home from "./components/Home/Home";
 import Product from "./components/Details/Product";
+import Login from './components/Auth/Login/Login';
+import { AuthProvider } from './context/AuthContext';
 
 import "./App.css";
 
@@ -18,14 +20,19 @@ function App() {
     return (
         <div className="main">
         <Router>
-        <div className="navbar"><Navbar /></div>
+        <AuthProvider>
+        <Routes>
+        <Route path="/login/" element={<Login/>} />     
+        </Routes>
+        <Navbar />
 
+        <Routes>
 
-                {/* <div className="left_bar"><AsideBar /></div> */}
-                    <Routes>
-                        <Route path="/" element={<Home/>} />                
-                        <Route path="/products/*" element={<Product/>} />                
-                    </Routes>
+        <Route path="/" element={<Home/>} />                
+        <Route path="/products/*" element={<Product/>} />       
+        </Routes>
+
+        </AuthProvider>
         </Router>
         </div>
 

@@ -16,7 +16,7 @@ export default function Login() {
             <form onSubmit={loginUser}>
                 <h1>Вход</h1>
                 <div className="login-input-box">
-                    <input name="username" type="email" placeholder="Email" required />
+                    <input name="username" placeholder="Email" required />
                     <i className='bx bx-envelope' ></i>
                 </div>
                 <div className="login-input-box">

@@ -5,11 +5,12 @@ from .serializer import ProfileSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 
-from .serializer import TokenObtainPairSerializer
+from .serializer import CustomTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = TokenObtainPairSerializer
+    serializer_class = CustomTokenObtainPairSerializer
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
     let loginUser = async (e) => {
         e.preventDefault()
-        const response = await fetch('/api/user/token/', {
+        const response = await fetch('/api/users/token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const updateToken = async () => {
-        const response = await fetch('/api/user/token/refresh/', {
+        const response = await fetch('/api/users/token/refresh/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

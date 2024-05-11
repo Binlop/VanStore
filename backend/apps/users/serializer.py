@@ -1,19 +1,20 @@
 from rest_framework import serializers
 from .models import Profile, User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from rest_framework.validators import UniqueValidator
 from django.core.validators import RegexValidator
 from .services.user_process import UserService
 
-class TokenObtainPairSerializer(TokenObtainPairSerializer):
+from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
         token['username'] = user.username
         return token
-
+    
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

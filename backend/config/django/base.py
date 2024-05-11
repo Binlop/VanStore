@@ -9,12 +9,13 @@ from datetime import timedelta
 
 from dotenv import load_dotenv
 
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
 
 
-SECRET_KEY = os.environ.get('SECRET_KEY'),
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = False
 
@@ -36,6 +37,7 @@ THIRD_PARTY = (
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',    
     'corsheaders',
+    'rest_framework_simplejwt'
 )
 
 LOCAL_APPS = (
@@ -123,8 +125,8 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
     ),
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
