@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializer import ProfileSerializer
 from rest_framework.views import APIView
 from rest_framework import status
+from .models import Account
 
 from .serializer import CustomTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -30,3 +31,18 @@ class RegisterView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class ConfirmAccountView(APIView):
+    def get(self, request, token):
+        try:
+            user = Account.objects.get(confirmation_token=token)
+        except Account.DoesNotExist:
+            return Response({'error': 'Invalid confirmation token'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.is_active = True
+        user.confirmation_token = None
+        user.save()
+
+        return Response({'message': 'Учетная запись подтверждена успешно'})
+

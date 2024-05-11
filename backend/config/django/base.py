@@ -22,6 +22,7 @@ DEBUG = False
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 DJANGO_APPS = (
@@ -37,7 +38,7 @@ THIRD_PARTY = (
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',    
     'corsheaders',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
 )
 
 LOCAL_APPS = (
@@ -86,6 +87,12 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL='users.Account'
+
+AUTHENTICATION_BACKENDS = (  
+  'django.contrib.auth.backends.ModelBackend',
+)
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -100,6 +107,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'lew3079@gmail.com'
+# EMAIL_HOST_PASSWORD = 'key' #past the key or password app here
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'default from email'
+EMAIL_HOST_PASSWORD = 'wctjucsihysugttj' # Add your password here
+
 
 
 LANGUAGE_CODE = 'en-us'
@@ -118,7 +136,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'django_static/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'backend/media/')
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ALLOWED_ORIGINS = [
+   "http://localhost:3000",
+   "http://127.0.0.1:3000"
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
