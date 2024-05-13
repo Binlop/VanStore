@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-body {
+.reg-senior-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
