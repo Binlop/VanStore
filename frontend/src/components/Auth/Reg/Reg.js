@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './Reg.css';
 
-export default function Reg() {
+export default function Register() {
 
 	const [password, setPassword] = useState('');
 	const [repPassword, setRepPassword] = useState('');

@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Product from "./components/Details/Product";
 import Login from './components/Auth/Login/Login';
+import Register from "./components/Auth/Reg/Reg";
 import { AuthProvider } from './context/AuthContext';
 
 import "./App.css";
@@ -22,13 +23,13 @@ function App() {
         <Router>
         <AuthProvider>
         <Navbar />
+
         <Routes>
         <Route path="/login/" element={<Login/>} />     
+        <Route path="/register/" element={<Register/>} />  
         </Routes>
-        
 
         <Routes>
-
         <Route path="/" element={<Home/>} />                
         <Route path="/products/*" element={<Product/>} />       
         </Routes>

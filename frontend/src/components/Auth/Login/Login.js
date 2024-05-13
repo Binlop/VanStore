@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import './Login.css';
 import AuthContext from "../../../context/AuthContext";
 
@@ -17,9 +18,13 @@ export default function Login() {
                 <form onSubmit={loginUser}>
                     <h1>Вход</h1>
                     <div className="login-input-box">
-                        <input name="username" placeholder="Email" required />
+                        <input name="email" type="email" placeholder="Email" required />
                         <i className='bx bx-envelope' ></i>
                     </div>
+                    {/* <div className="login-input-box">
+                        <input name="username" type="text" placeholder="Username" required />
+                        <i className='bx bx-envelope' ></i>
+                    </div> */}
                     <div className="login-input-box">
                         <input minLength={8} name="password" type="password" placeholder="Пароль" required />
                         <i className='bx bx-lock-alt' ></i>
@@ -34,7 +39,7 @@ export default function Login() {
                     <button className="login-button" type="submit">Войти</button>
 
                     <div className="login-register-link">
-                        <p>Нет аккаунта? <a href="#">Зарегистрироваться</a></p>
+                        <p>Нет аккаунта? <Link to={`/register/`}>Зарегистрироваться</Link></p>
                     </div>
                 </form>
             </div>
