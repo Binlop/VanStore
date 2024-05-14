@@ -1,51 +1,31 @@
-from rest_framework import serializers
-from .models import Profile, Account
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework.validators import UniqueValidator
-from django.core.validators import RegexValidator
-from .services.user_process import UserService
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from .serializer import ProfileSerializer
+from rest_framework.views import APIView
+from rest_framework import status
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token['username'] = user.username
-        return token
-    
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Account
-        fields = '__all__'
-        extra_kwargs = {"password": {"write_only": True}}
+from .serializer import CustomTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-class RegistrationSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(validators=[RegexValidator(r'^[\w.@+-]+$', 'Введите корректное имя пользователя. Можете использовать буквы, цифры и символы @/./+/-/_'), UniqueValidator(queryset=Account.objects.all(), message='Это имя пользователя уже занято.')])
-    email = serializers.EmailField(validators=[UniqueValidator(queryset=Account.objects.all(), message='Этот адрес электронной почты уже зарегистрирован.')])
-    password = serializers.CharField()
-    # name = serializers.CharField()
-    # firstname = serializers.CharField()
-    # patronymic = serializers.CharField()
-    # phone = serializers.CharField()
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
-    class Meta:
-        model = Account
-        fields = ('password', 'username', 'email')
-
-    def create(self, validated_data: dict) -> Account:
-        service = UserService()
-        return service.create_user(validated_data=validated_data)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_profile(request):
+    user = request.user
+    profile = user.profile
+    serializer = ProfileSerializer(profile)
+    return Response(serializer.data)
 
 
-# class RegistrationSerializer(serializers.ModelSerializer):
-#    class Meta:
-#        model=Account
-#        fields=('email', 'username', 'password')
-#        extra_kwargs={'password':{'write_only':True}}
+class RegisterView(APIView):
 
-#    def create(self,validated_data):
-#        password=validated_data.pop('password',None)
-#        instance=self.Meta.model(**validated_data)
-#        if password is not None:
-#            instance.set_password(password)
-#        instance.save()
-#        return instance
+    def post(self, request):
+        serializer = ProfileSerializer(data=request.data)        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
