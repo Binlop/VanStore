@@ -5,8 +5,6 @@ from rest_framework.validators import UniqueValidator
 from django.core.validators import RegexValidator
 from .services.user_process import UserService
 
-from rest_framework import serializers
-
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
