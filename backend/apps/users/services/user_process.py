@@ -11,35 +11,28 @@ class UserService:
 
     @transaction.atomic
     def create_user(self, validated_data: dict) -> Profile:
-        print(validated_data)
-        django_user_data = validated_data.get('user')
-        if django_user_data:
-            user = Account.objects.create(
-                username = django_user_data.get('username'),
-                password = django_user_data.get('password'),
-                email = django_user_data.get('email'),
-                confirmation_token=create_confirmation_token(),
+        user = Account.objects.create(
+            username = validated_data.get('username'),
+            # password = 
+            email = validated_data.get('email'),
+            confirmation_token=create_confirmation_token(),
 
-            )
-            user.is_active = False
-            user.save()
-            print('отправляем письмо')
+        )
+        user.set_password(validated_data.get('password'))
+        user.is_active = False
+        user.save()
+        print('отправляем письмо')
 
-            self.send_confirmation_email(user)
+        self.send_confirmation_email(user)
 
-            profile = Profile.objects.create(
-                username = django_user_data.get('username'),
-                email = django_user_data.get('email'),
-                first_name = validated_data.get('first_name'),
-                last_name = validated_data.get('last_name'),
-                is_manager = validated_data.get('is_manager', False),
-                user = user
-            )
-            print('saviiiiiiiiiiiiiiiiiiiiiiiing')
-            profile.save()
-            return profile
+        profile = Profile.objects.create(
+            is_manager = validated_data.get('is_manager', False),
+            user = user
+        )
+        print('saviiiiiiiiiiiiiiiiiiiiiiiing')
+        profile.save()
+        return user
         
-        raise ValueError("Data to django user was not found")
     
     def send_confirmation_email(self, user: Account):
         confirmation_url = f'localhost:8000/api/users/confirm/{user.confirmation_token}'

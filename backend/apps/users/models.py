@@ -25,10 +25,10 @@ class CustomAccountManager(BaseUserManager):
 class Account(AbstractUser,PermissionsMixin):
     email=models.EmailField(unique=True)
     username= models.CharField(_('User Name'),max_length=150)
-    first_name = models.CharField(_('First Name'),max_length=150)
-    last_name = models.CharField(_('last Name'),max_length=150)
+    first_name = models.CharField(_('First Name'),max_length=150, null=True, blank=True)
+    last_name = models.CharField(_('last Name'),max_length=150, null=True, blank=True)
     is_staff=models.BooleanField(default=False)
-    is_active=models.BooleanField(default=True)
+    is_active=models.BooleanField(default=False)
     confirmation_token = models.CharField(max_length=255, blank=True, null=True)
 
     objects=CustomAccountManager()
@@ -41,10 +41,6 @@ class Account(AbstractUser,PermissionsMixin):
    
 class Profile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE, related_name='profile')
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    username = models.CharField(max_length=150)
-    email = models.EmailField()
     is_manager = models.BooleanField('Менеджер', default=False)
 
     def __str__(self):
