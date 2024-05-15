@@ -1,16 +1,20 @@
 import { React, useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import './Details.css';
 import product from './/example_products_photo/1.webp';
 import axios from "axios";
 
 export default function ProductDetail() {
   const [data, setData] = useState([]);
+  const { uuid } = useParams();
+
   useEffect(() => {
     getProductDetails()
   }, [])
-  function getProductDetails() {
+
+  const getProductDetails = () => {
     axios
-      .get('/api/products/ccd9ead9-6e54-4de9-bd22-2852f9a4cc56/')
+      .get(`/api/products/${uuid}/`)
       .then((res) => {
         setData(res.data);
       })

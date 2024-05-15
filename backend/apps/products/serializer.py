@@ -76,7 +76,7 @@ class PhoneSerializer(DeviceSerializer):
     processor_model = serializers.CharField()
     number_of_cores = serializers.IntegerField()
     max_processor_frequency = serializers.FloatField()
-    ram_type = serializers.ChoiceField(choices=Phone.RAM_TYPE_CHOICES)
+    ram_type = serializers.CharField(required=False)
     ram_capacity = serializers.IntegerField()
     virtual_ram = serializers.BooleanField()
     internal_storage = serializers.IntegerField()
