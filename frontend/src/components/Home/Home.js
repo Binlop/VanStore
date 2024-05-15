@@ -36,83 +36,83 @@ export default function Home() {
             {productsList && productsList.map(product => (                    
                     <div className="item">
                         <div style={{ alignItems: 'center' }}>
-                            <img src={product1} width={145} height={145} />
+                            <img alt="product" src={product1} width={145} height={145} />
                             <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                                <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
-                                <span>{product.name}</span>
+                                <span style={{ color: 'red' }}>5 000 ₽</span>
+                                <span title={product.name} className="home-product-name">{product.name}</span>
                             </div>
                         </div>
                     </div>
                 ))}
                 <div className="item">
                     <div style={{ alignItems: 'center' }}>
-                        <img src={product1} width={145} height={145} />
+                        <img alt="product" src={product1} width={145} height={145} />
                         <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
-                            <span>Товар 1</span>
+                            <span style={{ color: 'red' }}>5 000 ₽</span>
+                            <span title="Средство для мытья посуды Fairy Нежные руки, Ромашка и витамин E, 1,35 л" className="home-product-name">Средство для мытья посуды Fairy Нежные руки, Ромашка и витамин E, 1,35 л</span>
                         </div>
                     </div>
                 </div>
                 <div className="item">
                     <div style={{ alignItems: 'center' }}>
-                        <img src={product2} width={145} height={145} />
+                        <img alt="product" src={product2} width={145} height={145} />
                         <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
-                            <span>Товар 2</span>
+                            <span style={{ color: 'red' }}>5 000 ₽</span>
+                            <span title="Кофе молотый, Carte Noire Original, 230г" className="home-product-name">Кофе молотый, Carte Noire Original, 230г</span>
                         </div>
                     </div>
                 </div>
                 <div className="item">
                     <div style={{ alignItems: 'center' }}>
-                        <img src={product3} width={145} height={145} />
+                        <img alt="product" src={product3} width={145} height={145} />
                         <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
-                            <span>Товар 3</span>
+                            <span style={{ color: 'red' }}>5 000 ₽</span>
+                            <span title="Товар 3" className="home-product-name">Товар 3</span>
                         </div>
                     </div>
                 </div>
                 <div className="item">
                     <div style={{ alignItems: 'center' }}>
-                        <img src={product4} width={145} height={145} />
+                        <img alt="product" src={product4} width={145} height={145} />
                         <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
-                            <span>Товар 4</span>
+                            <span style={{ color: 'red' }}>5 000 ₽</span>
+                            <span title="Товар 4" className="home-product-name">Товар 4</span>
                         </div>
                     </div>
                 </div>
                 <div className="item">
                     <div style={{ alignItems: 'center' }}>
-                        <img src={product5} width={145} height={145} />
+                        <img alt="product" src={product5} width={145} height={145} />
                         <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
-                            <span>Товар 5</span>
+                            <span style={{ color: 'red' }}>5 000 ₽</span>
+                            <span title="Товар 5" className="home-product-name">Товар 5</span>
                         </div>
                     </div>
                 </div>
                 <div className="item">
                     <div style={{ alignItems: 'center' }}>
-                        <img src={product6} width={145} height={145} />
+                        <img alt="product" src={product6} width={145} height={145} />
                         <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
-                            <span>Товар 6</span>
+                            <span style={{ color: 'red' }}>5 000 ₽</span>
+                            <span title="Товар 6" className="home-product-name">Товар 6</span>
                         </div>
                     </div>
                 </div>
                 <div className="item">
                     <div style={{ alignItems: 'center' }}>
-                        <img src={product7} width={145} height={145} />
+                        <img alt="product" src={product7} width={145} height={145} />
                         <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
-                            <span>Товар 7</span>
+                            <span style={{ color: 'red' }}>5 000 ₽</span>
+                            <span title="Товар 7" className="home-product-name">Товар 7</span>
                         </div>
                     </div>
                 </div>
                 <div className="item">
                     <div style={{ alignItems: 'center' }}>
-                        <img src={product8} width={145} height={145} />
+                        <img alt="product" src={product8} width={145} height={145} />
                         <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ color: 'red', marginBottom: '5px' }}>5 000 Р</span>
-                            <span>Товар 8</span>
+                            <span style={{ color: 'red' }}>5 000 ₽</span>
+                            <span title="Товар 8" className="home-product-name">Товар 8</span>
                         </div>
                     </div>
                 </div>
