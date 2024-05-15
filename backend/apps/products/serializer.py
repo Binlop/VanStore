@@ -21,10 +21,13 @@ class DeviceSerializer(serializers.Serializer):
     id = serializers.UUIDField()
     name = serializers.CharField()
     description = serializers.CharField()
+    price = serializers.DecimalField(max_digits=19, decimal_places=10)
+    quantity = serializers.IntegerField()
+    warranty = serializers.IntegerField(required=False)
+    release = serializers.IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
         fields = kwargs.pop('fields', None)
-        
         super().__init__(*args, **kwargs)
         self.service = None
 
@@ -49,12 +52,59 @@ class DeviceSerializer(serializers.Serializer):
 
 
 class PhoneSerializer(DeviceSerializer):
+    product_type = serializers.CharField()
+    phone_model = serializers.CharField()
+    manufacturer = serializers.ChoiceField(choices=Phone.MANUFACTURER_CHOICES)
+    code = serializers.CharField()
+    release_year = serializers.IntegerField(required=False)
+    back_color = serializers.ChoiceField(choices=Phone.COLOR_CHOICES)
+    side_color = serializers.ChoiceField(choices=Phone.COLOR_CHOICES)
+    declared_color = serializers.ChoiceField(choices=Phone.COLOR_CHOICES)
+    warranty = serializers.IntegerField()
+    physical_sim_count = serializers.IntegerField()
+    esim_count = serializers.IntegerField()
+    sim_format = serializers.ChoiceField(choices=Phone.SIM_FORMAT_CHOICES)
+    refresh_rate = serializers.IntegerField()
+    ppi = serializers.IntegerField()
+    aspect_ratio = serializers.CharField()
+    color_depth = serializers.FloatField()
+    screen_design = serializers.ChoiceField(choices=Phone.SCREEN_DESIGN_CHOICES)
+    screen_diagonal = serializers.FloatField()
+    body_type = serializers.ChoiceField(choices=Phone.BODY_TYPE_CHOICES)
+    body_material = serializers.ChoiceField(choices=Phone.BODY_MATERIAL_CHOICES)
+    os = serializers.ChoiceField(choices=Phone.OS_CHOICES)
+    os_version = serializers.CharField()
+    processor_model = serializers.CharField()
+    number_of_cores = serializers.IntegerField()
+    max_processor_frequency = serializers.FloatField()
+    ram_type = serializers.ChoiceField(choices=Phone.RAM_TYPE_CHOICES)
+    ram_capacity = serializers.ChoiceField(choices=Phone.RAM_CAPACITY_CHOICES)
+    virtual_ram = serializers.BooleanField()
+    internal_storage = serializers.IntegerField()
+    main_camera_count = serializers.IntegerField()
+    main_camera_resolution = serializers.IntegerField()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.service = PhoneService
 
 
 class ComputerSerializer(DeviceSerializer):
+    product_type = serializers.CharField()
+    material = serializers.ChoiceField(choices=Computer.MATERIAL_TYPES)
+    fingerprint_scanner = serializers.BooleanField()
+    mechanical_keyboard = serializers.BooleanField()
+    waterproof_keyboard = serializers.BooleanField()
+    screen_diagonal = serializers.FloatField()
+    touch_screen = serializers.BooleanField()
+    processor_model = serializers.CharField()
+    total_number_cores = serializers.IntegerField()
+    processor_frequency = serializers.FloatField()
+    memory_type = serializers.ChoiceField(choices=Computer.MEMORY_TYPES)
+    amount_RAM = serializers.IntegerField()
+    max_amount_RAM = serializers.IntegerField()
+    total_volume_SSD = serializers.IntegerField()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.service = ComputerService
