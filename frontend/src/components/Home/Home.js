@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios"
+import { Link } from 'react-router-dom';
 import './home.css'
 import product1 from './example_products_photo/1.webp'
 import product2 from './example_products_photo/2.webp'
@@ -39,7 +40,7 @@ export default function Home() {
                             <img alt="product" src={product1} width={145} height={145} />
                             <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
                                 <span style={{ color: 'red' }}>5 000 ₽</span>
-                                <span title={product.name} className="home-product-name">{product.name}</span>
+                                <span title={product.name} className="home-product-name"><Link to={`/products/${product.id}`} className="link-style">{product.name}</Link></span>
                             </div>
                         </div>
                     </div>

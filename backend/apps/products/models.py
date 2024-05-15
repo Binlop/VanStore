@@ -71,10 +71,6 @@ class Phone(DeviceBase):
         ('iOS', 'iOS'),
         ('Android', 'Android'),
     )
-    RAM_TYPE_CHOICES = (
-        ('LPDDR4', 'LPDDR4'),
-        ('LPDDR5', 'LPDDR5'),
-    )
 
     device = GenericRelation(Device, related_query_name="phone")
     product_type = models.CharField(verbose_name="Тип товара", max_length=25, default='phone')
@@ -116,7 +112,7 @@ class Phone(DeviceBase):
     max_processor_frequency = models.FloatField(verbose_name='Максимальная частота процессора, ГГц', default=0)
 
     # Оперативная память
-    ram_type = models.CharField(verbose_name='Тип оперативной памяти', choices=RAM_TYPE_CHOICES, default='lpddr5', max_length=25)
+    ram_type = models.CharField(verbose_name='Тип оперативной памяти', default='lpddr5', max_length=25)
     ram_capacity = models.IntegerField(verbose_name='Объем оперативной памяти, ГБ', default=8)
     virtual_ram = models.BooleanField(verbose_name='Виртуальное расширение ОЗУ', default=False)
     internal_storage = models.IntegerField(verbose_name='Объем встроенной памяти, ГБ', default=0)
