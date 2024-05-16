@@ -3,6 +3,7 @@ from typing import Union
 from .models import Cart
 from users.models import Account
 from products.serializer import HandleDeviceSerializer
+from .services.cart import CartService
 
 class CartSerializer(serializers.Serializer):
     id = serializers.UUIDField()
@@ -14,11 +15,15 @@ class CartSerializer(serializers.Serializer):
         return serializer.data
 
     def create(self, validated_data: dict) -> Cart:
-        username = validated_data.get('username')
-        if username is not None:
-            user = Account.objects.get(username=username)
-
-            cart = Cart.objects.create(
-                user = user
-            )
+        user = None
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            user = request.user
+            if user.is_anonymous:
+                return ValueError('User must be not anomymous')
+            
+            validated_data['user'] = user
+            service = CartService()
+            return service.add_product_to_cart(validated_data=validated_data)
         
+        else: return ValueError('Request user does not exist')
