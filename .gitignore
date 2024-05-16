@@ -8,6 +8,7 @@ backend/db.sqlite3
 **node_modules
 /.pnp
 .pnp.js
+backend/media/
 
 # testing
 /coverage
