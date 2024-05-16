@@ -3,6 +3,8 @@
     margin-right: 15%;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 150px;
 }
 
 .details{

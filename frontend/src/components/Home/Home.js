@@ -39,7 +39,7 @@ export default function Home() {
                         <div style={{ alignItems: 'center' }}>
                             <img alt="product" src={product1} width={145} height={145} />
                             <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                                <span style={{ color: 'red' }}>5 000 ₽</span>
+                                <span style={{ color: 'red' }}>{Math.floor(product.price)} ₽</span>
                                 <span title={product.name} className="home-product-name"><Link to={`/products/${product.id}`} className="link-style">{product.name}</Link></span>
                             </div>
                         </div>
