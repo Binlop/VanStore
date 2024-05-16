@@ -37,7 +37,7 @@ export default function Home() {
             {productsList && productsList.map(product => (                    
                     <div className="item">
                         <div style={{ alignItems: 'center' }}>
-                            <img alt="product" src={product.image} width={145} height={145} />
+                        <img alt="product" src={`http://localhost:8000/api/files/products/images/${product.image.id}`} width={145} height={145} />
                             <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
                                 <span style={{ color: 'red' }}>{Math.floor(product.price)} ₽</span>
                                 <a href={product.image} download={product.image}>Скачать</a>

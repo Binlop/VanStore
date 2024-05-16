@@ -2,6 +2,7 @@ from rest_framework import serializers
 from typing import Union
 from .models import Phone, Computer
 from .services.device import PhoneService, ComputerService
+from files.serializer import FileSerializer
 
 class HandleDeviceSerializer(serializers.Serializer):
 
@@ -25,7 +26,7 @@ class DeviceSerializer(serializers.Serializer):
     quantity = serializers.IntegerField()
     warranty = serializers.IntegerField(required=False)
     release = serializers.IntegerField(required=False)
-    image = serializers.ImageField(required=False)
+    image = FileSerializer(required=False)
 
     def __init__(self, *args, **kwargs):
         fields = kwargs.pop('fields', None)
