@@ -57,3 +57,17 @@
     text-overflow: ellipsis;
     line-height: 1.15;
 }
+
+.link-style {
+    text-decoration: none;
+    
+}
+
+.link-style:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.link-style:hover {
+    color: #005bff;
+}
