@@ -36,7 +36,8 @@ class DeviceBase(BaseModel):
     rating = models.FloatField('Рейтинг', default=5.0)
     warranty = models.IntegerField(verbose_name="Гарантия продавца / производителя, мес", null=True, blank=True)
     release = models.IntegerField(verbose_name="Дата релиза, год", null=True, blank=True)
-
+    image = models.ImageField(verbose_name='Изображение товара', upload_to='products/images/', blank=True, null=True)
+    
     class Meta:
         abstract = True
 

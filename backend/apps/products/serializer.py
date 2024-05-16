@@ -25,6 +25,7 @@ class DeviceSerializer(serializers.Serializer):
     quantity = serializers.IntegerField()
     warranty = serializers.IntegerField(required=False)
     release = serializers.IntegerField(required=False)
+    image = serializers.ImageField(required=False)
 
     def __init__(self, *args, **kwargs):
         fields = kwargs.pop('fields', None)
