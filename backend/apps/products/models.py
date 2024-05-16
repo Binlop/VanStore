@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from utils.base_models import BaseModel
+from files.models import FileModel
 
 class Device(BaseModel):
     """
@@ -36,7 +37,7 @@ class DeviceBase(BaseModel):
     rating = models.FloatField('Рейтинг', default=5.0)
     warranty = models.IntegerField(verbose_name="Гарантия продавца / производителя, мес", null=True, blank=True)
     release = models.IntegerField(verbose_name="Дата релиза, год", null=True, blank=True)
-    image = models.ImageField(verbose_name='Изображение товара', upload_to='products/images/', blank=True, null=True)
+    image = models.OneToOneField(FileModel, on_delete=models.CASCADE,  null=True, blank=True)
     
     class Meta:
         abstract = True
