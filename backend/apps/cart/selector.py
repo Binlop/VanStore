@@ -16,5 +16,7 @@ class CartSelector:
         return device_list
     
     def get_user_cart(self, user: Account) -> Union[Phone, Computer]:
+        if user.is_anonymous:
+            raise Cart.DoesNotExist('User in not exist')
         cart = Cart.objects.get(user=user)
         return cart

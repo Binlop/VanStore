@@ -25,7 +25,6 @@ def get_profile(request):
 class RegisterView(APIView):
 
     def post(self, request):
-        print(request.data)
         serializer = RegistrationSerializer(data=request.data)        
         if serializer.is_valid():
             serializer.save()

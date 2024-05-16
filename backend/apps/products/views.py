@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from . import serializer as serializers
 from .selector import DeviceSelector
 from rest_framework import status
-
+from .models import Device
 
 class DeviceViewBase(APIView):
     serializer = None
@@ -41,3 +41,5 @@ class DeviceDetailView(DeviceViewBase):
         serializer = self.get_serializer_class()(device)
                 
         return Response(serializer.data)
+    
+

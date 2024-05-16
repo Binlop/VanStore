@@ -5,39 +5,38 @@ from .selector import CartSelector
 from rest_framework import status
 
 
-class DeviceViewBase(APIView):
+class CartViewBase(APIView):
     serializer = None
     selector = None
 
-    def get_serializer_class(self):
+    def get_serializer_class(self, *args, **kwargs):
         if self.serializer:
-            return self.serializer
+            return self.serializer(*args, **kwargs)
         else:
             raise ValueError("Serializer is not set for view")
             
-    def get_selector_class(self):
+    def get_selector_class(self, *args, **kwargs):
         if self.selector:
-            return self.selector()
+            return self.selector(*args, **kwargs)
         else:
             raise ValueError("Selector is not set for view")
         
-class CartDetailView(DeviceViewBase):
+class CartView(CartViewBase):
     selector = CartSelector
     serializer = serializers.CartSerializer
 
     def get(self, request, format=None):
+        print(request.user)
         selector = self.get_selector_class()
-        devices = selector.get_list_products()      
-        serializer = self.get_serializer_class()(devices, many=True)
+        cart = selector.get_user_cart(user=request.user)      
+        serializer = self.get_serializer_class(cart, many=True)
         return Response(serializer.data)
     
-# class DeviceDetailView(DeviceViewBase):
-#     selector = DeviceSelector
-#     serializer = serializers.HandleDeviceSerializer
-
-#     def get(self, request, pk):
-#         selector = self.get_selector_class()
-#         device = selector.get_detail_product(pk=pk)
-#         serializer = self.get_serializer_class()(device)
+    def post(self, request):
+        serializer = serializers.CartSerializer(data=request.data)        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
                 
-#         return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    

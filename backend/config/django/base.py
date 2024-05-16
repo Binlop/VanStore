@@ -45,6 +45,7 @@ LOCAL_APPS = (
     'products',
     'users',
     'cart',
+    'files',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY + LOCAL_APPS
