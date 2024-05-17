@@ -32,10 +32,10 @@ export default function ProductDetail() {
         <h1 className="header">{data.name}</h1>
         <div className="details">
           <div className="pictures">
-            <img className="image" src={product} alt="product"></img>
+            <img className="image" src={data.image ? `http://localhost:8000/api/files/products/images/${data.image.id}` : product} alt="product"></img>
           </div>
           <div className="text_right">
-            <div className="full_name">{data.name}</div>
+            <div className="full_name">{data.description}</div>
             <div className="top_buttons">
               <div className="compare">Сравнить</div>
               <div className="rating">Рейтинг</div>
@@ -133,10 +133,10 @@ export default function ProductDetail() {
       <h1 className="header">{data.name}</h1>
       <div className="details">
         <div className="pictures">
-          <img className="image" src={product} alt="product"></img>
+          <img className="image" src={data.image ? `http://localhost:8000/api/files/products/images/${data.image.id}` : product} alt="product"></img>
         </div>
         <div className="text_right">
-          <div className="full_name">{data.name}</div>
+          <div className="full_name">{data.description}</div>
           <div className="top_buttons">
             <div className="compare">Сравнить</div>
             <div className="rating">Рейтинг</div>
