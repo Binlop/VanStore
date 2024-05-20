@@ -47,16 +47,6 @@ function CartProduct(id, title, price) {
       setAmountCounter(e.target.value)
     }
 
-  function AmountHandler(e) {
-    if (e.target.className === 'cart-product-mid-amount-plus-btn') {
-      setAmountCounter(prev => parseInt(prev) + 1) // Без parseInt, при нажатии на + после ввода числа в инпут, вместо сложения добавляются единицы к содержимому как строка к строке, ХЗ ПОЧЕМУ (судя по всему всё, что вводится в инпут всегда преобразуется в строку, несмотря на то что у инпута type='number')
-    } else {
-      if (amountCounter > 1) {
-        setAmountCounter(prev => parseInt(prev) - 1) // Здесь такой проблемы как с плюсом не было, но на всякий случай тоже обернул в parseInt
-      }
-    }
-  }
-
   return (
     <div key={id} className="cart-product-card"> {/* Несмотря на то, что key не виден в html, он всё равно работает */}
       <div className="cart-product-info">
@@ -64,9 +54,9 @@ function CartProduct(id, title, price) {
         <div className="cart-product-mid">
           <div className="cart-product-mid-name">{title}</div>
           <div className="cart-product-mid-amount">
-            <button type="button" className="cart-product-mid-amount-minus-btn" onClick={AmountHandler}>-</button>
+            <button type="button" className="cart-product-mid-amount-minus-btn" onClick={() => {if(amountCounter > 1){setAmountCounter(prev => parseInt(prev) - 1)}}}>-</button>
             <input type="number" min={1} max={99} value={amountCounter} onChange={AmountChanger} />
-            <button type="button" className="cart-product-mid-amount-plus-btn" onClick={AmountHandler}>+</button>
+            <button type="button" className="cart-product-mid-amount-plus-btn" onClick={() => {if(amountCounter < 99){setAmountCounter(prev => parseInt(prev) + 1)}}}>+</button>
           </div>
         </div>
         <div className="cart-product-right">
