@@ -1,23 +1,6 @@
-import { React, useEffect, useState } from "react"
+import { React, useState } from "react"
 import './Cart.css'
 import product1 from './/example_products_photo/1.webp';
-
-function RenderProducts() {
-  const [productsList, setProductsList] = useState([
-    { id: '1', title: 'phone', price: '19999' },
-    { id: '2', title: 'laptop', price: '53999' },
-    { id: '3', title: 'CPU', price: '49999' },
-    { id: '4', title: 'GPU', price: '102999' }
-  ])
-
-  return (
-    productsList && productsList.map(
-      prod => (
-        CartProduct(prod.id, prod.title, prod.price)
-      )
-    )
-  )
-}
 
 export default function Cart() {
   return (
@@ -40,12 +23,25 @@ export default function Cart() {
   )
 }
 
+function RenderProducts() {
+  const [productsList, setProductsList] = useState([
+    { id: '1', title: 'phone', price: '19999' },
+    { id: '2', title: 'laptop', price: '53999' },
+    { id: '3', title: 'CPU', price: '49999' },
+    { id: '4', title: 'GPU', price: '102999' }
+  ])
+
+  return (
+    productsList && productsList.map(
+      prod => (
+        CartProduct(prod.id, prod.title, prod.price)
+      )
+    )
+  )
+}
+
 function CartProduct(id, title, price) {
   const [amountCounter, setAmountCounter] = useState(1)
-
-  function AmountChanger(e) {
-      setAmountCounter(e.target.value)
-    }
 
   return (
     <div key={id} className="cart-product-card"> {/* Несмотря на то, что key не виден в html, он всё равно работает */}
@@ -54,9 +50,9 @@ function CartProduct(id, title, price) {
         <div className="cart-product-mid">
           <div className="cart-product-mid-name">{title}</div>
           <div className="cart-product-mid-amount">
-            <button type="button" className="cart-product-mid-amount-minus-btn" onClick={() => {if(amountCounter > 1){setAmountCounter(prev => parseInt(prev) - 1)}}}>-</button>
-            <input type="number" min={1} max={99} value={amountCounter} onChange={AmountChanger} />
-            <button type="button" className="cart-product-mid-amount-plus-btn" onClick={() => {if(amountCounter < 99){setAmountCounter(prev => parseInt(prev) + 1)}}}>+</button>
+            <button type="button" className="cart-product-mid-amount-minus-btn" onClick={() => { if (amountCounter > 1) { setAmountCounter(prev => parseInt(prev) - 1) } }}>-</button>
+            <input type="number" min={1} max={99} value={amountCounter} onChange={(e) => { setAmountCounter(e.target.value) }} />
+            <button type="button" className="cart-product-mid-amount-plus-btn" onClick={() => { if (amountCounter < 99) { setAmountCounter(prev => parseInt(prev) + 1) } }}>+</button>
           </div>
         </div>
         <div className="cart-product-right">
