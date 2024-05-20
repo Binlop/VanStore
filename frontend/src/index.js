@@ -6,11 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import Login from './components/Auth/Login/Login';
 import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Cart from './components/Cart/Cart';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Cart/>
     {/* <Router>
       <AuthProvider>
         <Routes>

@@ -1,11 +1,9 @@
-* {
+
+.senior-login-wrapper {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-}
-
-.senior-login-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,7 +43,7 @@
     height: 100%;
     background: transparent;
     border: none;
-    outline: none;
+    /* outline: none; */
     border: 2px solid rgba(5, 3, 3, 0.2);
     border-radius: 40px;
     font-size: 16px;
