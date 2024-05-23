@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import './Details.css';
 import product from './/example_products_photo/1.webp';
 import axios from "axios";
+import priceFormatter from "../../utils/priceFormatter";
 
 export default function ProductDetail() {
   const [data, setData] = useState([]);
@@ -44,7 +45,7 @@ export default function ProductDetail() {
               <div className="share"><img className="icons_0" width="30" height="30" src="https://img.icons8.com/windows/32/share-2.png" alt="share" /></div>
             </div>
             <div className="mid_buttons">
-              <div className="price">{Math.floor(data.price)} ₽</div>
+              <div className="price">{priceFormatter(Math.floor(data.price))} ₽</div>
               <div className="fav"><img className="icons_0" width="40" height="40" src="https://img.icons8.com/windows/64/like--v1.png" alt="Fav" /></div>
               <div className="buy"><strong>Купить</strong></div>
             </div>
@@ -145,7 +146,7 @@ export default function ProductDetail() {
             <div className="share"><img className="icons_0" width="30" height="30" src="https://img.icons8.com/windows/32/share-2.png" alt="share" /></div>
           </div>
           <div className="mid_buttons">
-            <div className="price">{Math.floor(data.price)} ₽</div>
+            <div className="price">{priceFormatter(Math.floor(data.price))} ₽</div>
             <div className="fav"><img className="icons_0" width="40" height="40" src="https://img.icons8.com/windows/64/like--v1.png" alt="Fav" /></div>
             <div className="buy"><strong>Купить</strong></div>
           </div>

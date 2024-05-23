@@ -3,6 +3,7 @@ import axios from "axios"
 import { Link } from 'react-router-dom';
 import './home.css'
 import product1 from './example_products_photo/1.webp'
+import priceFormatter from "../../utils/priceFormatter";
 
 export default function Home() {
   const [productsList, setProductsList] = useState(null);
@@ -37,7 +38,7 @@ export default function Home() {
               />
               </div>
               <div style={{ justifyContent: 'left', display: 'flex', flexDirection: 'column' }}>
-                <span style={{ color: 'red' }}>{Math.floor(product.price)} ₽</span>
+                <span style={{ color: 'red' }}>{priceFormatter(Math.floor(product.price))} ₽</span>
                 <span title={product.name} className="home-product-name"><Link to={`/products/${product.id}`} className="link-style">{product.name}</Link></span>
               </div>
             </div>
