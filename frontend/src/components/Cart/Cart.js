@@ -1,8 +1,10 @@
-import { React, useState } from "react"
+import { React, useEffect, useState } from "react"
 import './Cart.css'
 import product1 from './/example_products_photo/1.webp';
 
 export default function Cart() {
+  const [globalCount, setGlobalCount] = useState([])
+
   return (
     <div className="cart-container">
       <div className="cart-page">
@@ -12,10 +14,10 @@ export default function Cart() {
         </div>
         <div className="cart-page-under-title-part">
           <div className="cart-page-product-tabs">
-            {RenderProducts()}
+            <RenderProducts globalCount={globalCount} setGlobalCount={setGlobalCount} />
           </div>
           <div className="cart-page-total-amount">
-            {TotalAmount()}
+            <TotalAmount />
           </div>
         </div>
       </div>
@@ -23,7 +25,7 @@ export default function Cart() {
   )
 }
 
-function RenderProducts() {
+function RenderProducts({globalCount, setGlobalCount}) {
   const [productsList, setProductsList] = useState([
     { id: '1', title: 'phone', price: '19999' },
     { id: '2', title: 'laptop', price: '53999' },
@@ -34,17 +36,27 @@ function RenderProducts() {
   return (
     productsList && productsList.map(
       prod => (
-        CartProduct(prod.id, prod.title, prod.price)
+      <CartProduct id={prod.id} key={prod.id} title={prod.title} price={prod.price} globalCount={globalCount} setGlobalCount={setGlobalCount}/>
       )
     )
   )
 }
 
-function CartProduct(id, title, price) {
+function CartProduct({id, title, price, globalCount, setGlobalCount}) {
   const [amountCounter, setAmountCounter] = useState(1)
 
+  useEffect(() => {
+    let newCount = [...globalCount, amountCounter]
+    setGlobalCount(newCount)
+  }, [])
+
+  useEffect(() => {
+
+    console.log(globalCount)
+  }, [amountCounter])
+
   return (
-    <div key={id} className="cart-product-card"> {/* Несмотря на то, что key не виден в html, он всё равно работает */}
+    <div className="cart-product-card">
       <div className="cart-product-info">
         <div className="cart-product-image"><img src={product1} alt="product" /></div>
         <div className="cart-product-mid">
