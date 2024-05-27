@@ -29,11 +29,12 @@ class CartView(CartViewBase):
         print(request.user)
         selector = self.get_selector_class()
         cart = selector.get_user_cart(user=request.user)      
-        serializer = self.get_serializer_class(cart, many=True)
+        serializer = self.get_serializer_class(cart)
         return Response(serializer.data)
     
     def post(self, request):
-        serializer = serializers.CartSerializer(data=request.data)        
+        print(request.data)
+        serializer = serializers.CartSerializerInput(data=request.data)        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
