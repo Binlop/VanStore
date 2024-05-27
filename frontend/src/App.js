@@ -16,6 +16,7 @@ import Cart from "./components/Cart/Cart";
 import { AuthProvider } from './context/AuthContext';
 
 import "./App.css";
+import Cart from "./components/Cart/Cart";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 
 
         <Routes>
+        <Route path="/cart" element={<Cart/>} />
         <Route path="/login/" element={<Login/>} />     
         <Route path="/" element={<Home/>} />  
         <Route path="/products/*" element={<Product/>} />       

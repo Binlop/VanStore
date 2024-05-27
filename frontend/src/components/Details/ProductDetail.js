@@ -47,7 +47,7 @@ export default function ProductDetail() {
             <div className="mid_buttons">
               <div className="price">{priceFormatter(Math.floor(data.price))} ₽</div>
               <div className="fav"><img className="icons_0" width="40" height="40" src="https://img.icons8.com/windows/64/like--v1.png" alt="Fav" /></div>
-              <div className="buy"><strong>Купить</strong></div>
+              <button className="buy">Купить</button>
             </div>
           </div>
         </div>
@@ -256,7 +256,7 @@ export default function ProductDetail() {
             </div>
             <div className="char">
               <div className="char_name">Максимальная частота процессора</div>
-              <div className="char_value">{data.max_processor_frequency}</div>
+              <div className="char_value">{data.max_processor_frequency} ГГц</div>
             </div>
             <div className="char_title">Память</div>
             <div className="char">
