@@ -10,23 +10,23 @@ class CartSerializer(serializers.Serializer):
     products = serializers.SerializerMethodField()
 
     def get_products(self, obj: Cart):
-        print(obj)
+        # print(obj)
         products = obj.product.all()
-        print(products)
-        serializer = HandleDeviceSerializer(products, many=True, fields=('name', 'price'))
+        # print(products)
+        content_objects = [product.content_object for product in products]
+        # print(content_objects)
+        serializer = HandleDeviceSerializer(content_objects, many=True, fields=('name', 'price'))
         return serializer.data
 
 class CartProduct(serializers.Serializer):
     id = serializers.UUIDField()
 
-class CartSerializerInput(serializers.Serializer):
-    products = CartProduct()
+# class CartSerializerInput(serializers.Serializer):
+#     products = CartProduct()
 
     def create(self, validated_data: dict) -> Cart:
-        print(validated_data)
         user = None
         request = self.context.get("request")
-        print(request)
         if request and hasattr(request, "user"):
             user = request.user
             if user.is_anonymous:

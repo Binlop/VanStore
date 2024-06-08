@@ -10,7 +10,6 @@ class DeviceSelector:
         computer_qs = Computer.objects.all()
 
         device_list = list(chain(phone_qs, computer_qs))
-
         return device_list
     
     def get_detail_product(self, pk) -> Union[Phone, Computer]:

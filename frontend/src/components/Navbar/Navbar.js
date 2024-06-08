@@ -2,13 +2,14 @@ import React from "react";
 import { FaShoppingCart, FaHeart, FaSignInAlt } from 'react-icons/fa'; // Импортируем иконки из библиотеки react-icons
 import './navbar.css'
 import logo from './logo.png'
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     return (
         <div className="navbar_wrapper">
             <div className="header_main">
                 <div className="header_top">
-                    <h3>IT SCIENCE</h3>
+                <Link to={`/`} className="link-style"><h3>IT SCIENCE</h3></Link>
                     <div className="word-list">
                         <span>Акции</span>
                         <span>Слово2</span>
@@ -21,10 +22,10 @@ export default function Navbar() {
                         <input type="text" name="search" placeholder="Поиск товара"></input>
                     </div>
                     <div className="user-actions-list">
-                        <div className="user-actions-list-icon">
+                        <Link to={`/cart/`} className="link-style"><div className="user-actions-list-icon">
                             <FaShoppingCart />
                             <span>Корзина</span>
-                        </div>
+                        </div></Link>
                         <div className="user-actions-list-icon">
                             <FaHeart />
                             <span>Избранное</span>

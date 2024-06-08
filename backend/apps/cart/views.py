@@ -26,18 +26,26 @@ class CartView(CartViewBase):
     serializer = serializers.CartSerializer
 
     def get(self, request, format=None):
-        print(request.user)
         selector = self.get_selector_class()
-        cart = selector.get_user_cart(user=request.user)      
+        cart = selector.get_user_cart(data=request.data, user=request.user)      
         serializer = self.get_serializer_class(cart)
         return Response(serializer.data)
     
     def post(self, request):
-        print(request.data)
-        serializer = serializers.CartSerializerInput(data=request.data)        
+        serializer = serializers.CartProduct(data=request.data, context={'request': request})        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
                 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+class ListProductsToCartView(CartViewBase):
+    selector = CartSelector
+    serializer = serializers.HandleDeviceSerializer
+
+    def get(self, request):
+        selector = self.get_selector_class()
+        products = selector.get_user_cart(data=request.query_params, user=request.user)      
+        serializer = self.get_serializer_class(products, many=True)
+        return Response(serializer.data)

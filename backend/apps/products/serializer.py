@@ -23,9 +23,9 @@ class HandleDeviceSerializer(serializers.Serializer):
         Сериалайзер определяет тип объекта и передает его в соответствующий сериализатор
         """
         if isinstance(value, Phone):
-            serializer = PhoneSerializer(value, fields=self.fields)
+            serializer = PhoneSerializer(value)
         elif isinstance(value, Computer):
-            serializer = ComputerSerializer(value, fields=self.fields)
+            serializer = ComputerSerializer(value)
         else:
             raise Exception('Unexpected type of MODEL object')
         return serializer.data

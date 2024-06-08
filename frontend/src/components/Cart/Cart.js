@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react"
 import './Cart.css'
 import product1 from './/example_products_photo/1.webp';
 import priceFormatter from "../../utils/priceFormatter";
+import axios from "axios";
 
 export default function Cart() {
   const [productsList, setProductsList] = useState([
@@ -16,7 +17,10 @@ export default function Cart() {
     count: productsList.reduce((prev, curr) => { return prev + curr.count }, 0)
   })
 
+  const [serverProductList, setServerProductList] = useState([])
+
   useEffect(() => {
+    refreshCartProducts()
     setTotal({
       price: productsList.reduce((prev, curr) => { return prev + curr.priceTotal }, 0),
       count: productsList.reduce((prev, curr) => { return prev + curr.count }, 0)
@@ -29,6 +33,43 @@ export default function Cart() {
     })
   }
 
+  const refreshCartProducts = () => {
+    if (localStorage.authTokens != null) {
+      const token = JSON.parse(localStorage.authTokens)
+  
+      const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + String(token.access)
+      };
+      axios.get("/api/cart/", { headers })
+      .then((res) => {
+        setServerProductList(res.data);
+        console.log(res.data)
+      })
+      .catch(error => {
+        console.error('Ошибка с отправкой объекта:', error);
+        alert('Произошла ошибка при получение списка товаров в корзину.');
+      });
+      } else {
+        let localProducts = localStorage.getItem("localProducts") || null;
+        console.log('uuid локальных продуктов', localProducts)
+        const headers = {
+          'Content-Type': 'application/json',
+        };
+        let data = {"id": localProducts}
+
+        axios.get(`/api/cart/products/`, { params: data, headers: headers})
+        .then((res) => {
+          console.log(res.data)
+          setServerProductList(res.data);
+
+        })
+        .catch(error => {
+          console.error('Ошибка с отправкой объекта:', error);
+          alert('Произошла ошибка при добавлении продукта в избранное.');
+        });
+    }
+  }
 
   return (
     <div className="cart-container">

@@ -9,15 +9,15 @@ class DeviceViewBase(APIView):
     serializer = None
     selector = None
 
-    def get_serializer_class(self):
+    def get_serializer_class(self, *args, **kwargs):
         if self.serializer:
-            return self.serializer
+            return self.serializer(*args, **kwargs)
         else:
             raise ValueError("Serializer is not set for view")
             
-    def get_selector_class(self):
+    def get_selector_class(self, *args, **kwargs):
         if self.selector:
-            return self.selector()
+            return self.selector(*args, **kwargs)
         else:
             raise ValueError("Selector is not set for view")
         
@@ -28,7 +28,7 @@ class DeviceListView(DeviceViewBase):
     def get(self, request, format=None):
         selector = self.get_selector_class()
         devices = selector.get_list_products()      
-        serializer = self.get_serializer_class()(devices, many=True)
+        serializer = self.get_serializer_class(devices, many=True)
         return Response(serializer.data)
     
 class DeviceDetailView(DeviceViewBase):
@@ -38,7 +38,7 @@ class DeviceDetailView(DeviceViewBase):
     def get(self, request, pk):
         selector = self.get_selector_class()
         device = selector.get_detail_product(pk=pk)
-        serializer = self.get_serializer_class()(device)
+        serializer = self.get_serializer_class(device)
                 
         return Response(serializer.data)
     

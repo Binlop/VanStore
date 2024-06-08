@@ -14,6 +14,7 @@ export default function ProductDetail() {
   }, [])
 
   const getProductDetails = () => {
+    console.log(uuid)
     axios
       .get(`/api/products/${uuid}/`)
       .then((res) => {
@@ -26,6 +27,34 @@ export default function ProductDetail() {
     if (char) return "Есть"
     else return "Нет"
   }
+
+  const addToCart = () => {
+    console.log("отправляем товар")
+    console.log(localStorage.authTokens)
+    if (localStorage.authTokens != null) {
+      const token = JSON.parse(localStorage.authTokens)
+      let data = {"id": uuid}
+  
+      const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + String(token.access)
+      };
+      axios.post("/api/cart/add/", data, { headers })
+      .then(() => {
+        alert("Продукт добавлен в избранное");
+      })
+      .catch(error => {
+        console.error('Ошибка с отправкой объекта:', error);
+        alert('Произошла ошибка при добавлении продукта в избранное.');
+      });
+      } else {
+        let localProducts = JSON.parse(localStorage.getItem("localProducts") || '[]');
+        if (!localProducts.includes(uuid)){
+          localProducts.push(uuid);
+        }
+        localStorage.setItem("localProducts", JSON.stringify(localProducts));
+        alert("Продукт добавлен в избранное");
+    }}
 
   if (data.product_type === 'computer')
     return (
@@ -46,7 +75,11 @@ export default function ProductDetail() {
             </div>
             <div className="mid_buttons">
               <div className="price">{priceFormatter(Math.floor(data.price))} ₽</div>
-              <div className="fav"><img className="icons_0" width="40" height="40" src="https://img.icons8.com/windows/64/like--v1.png" alt="Fav" /></div>
+              <button onClick={addToCart}>
+                <div className="fav">
+                  <img className="icons_0" width="40" height="40" src="https://img.icons8.com/windows/64/like--v1.png" alt="Fav" />
+                </div>
+              </button>              
               <button className="buy">Купить</button>
             </div>
           </div>
@@ -147,7 +180,7 @@ export default function ProductDetail() {
           </div>
           <div className="mid_buttons">
             <div className="price">{priceFormatter(Math.floor(data.price))} ₽</div>
-            <div className="fav"><img className="icons_0" width="40" height="40" src="https://img.icons8.com/windows/64/like--v1.png" alt="Fav" /></div>
+            <button onClick={addToCart}><div className="fav"><img className="icons_0" width="40" height="40" src="https://img.icons8.com/windows/64/like--v1.png" alt="Fav" /></div></button>
             <div className="buy"><strong>Купить</strong></div>
           </div>
         </div>
